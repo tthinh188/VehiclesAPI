@@ -76,7 +76,7 @@ public class CarService {
          * meaning the Maps service needs to be called each time for the address.
          */
 
-        car.setLocation(mapsClient.getAddress(new Location(1.0,1.0)));
+        car.setLocation(mapsClient.getAddress(new Location(0d,0d)));
 
         return car;
     }
