@@ -2,7 +2,6 @@ package com.udacity.vehicles.service;
 
 import com.udacity.vehicles.client.maps.MapsClient;
 import com.udacity.vehicles.client.prices.PriceClient;
-import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
@@ -52,7 +51,7 @@ public class CarService {
          *   Remove the below code as part of your implementation.
          */
         Optional<Car> optionalCar = repository.findById(id);
-        if(optionalCar.isEmpty()) {
+        if(!optionalCar.isPresent()) {
             throw new CarNotFoundException();
         }
 
@@ -76,7 +75,7 @@ public class CarService {
          * meaning the Maps service needs to be called each time for the address.
          */
 
-        car.setLocation(mapsClient.getAddress(new Location(0d,0d)));
+        car.setLocation(mapsClient.getAddress(car.getLocation()));
 
         return car;
     }
@@ -109,7 +108,7 @@ public class CarService {
          *   If it does not exist, throw a CarNotFoundException
          */
         Optional<Car> optionalCar = repository.findById(id);
-        if(optionalCar.isEmpty()) {
+        if(!optionalCar.isPresent()) {
             throw new CarNotFoundException();
         }
 
